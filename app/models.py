@@ -19,6 +19,9 @@ class Tweet(db.Model):
     self.text = text
     self.externalid = externalid
 
+  def __repr__(self):
+    return '<id {} text {}... externalid {}>'.format(self.id, self.text[0:10], self.externalid)
+
 class Answer(db.Model):
 
   __tablename__ = "answers"
@@ -30,3 +33,6 @@ class Answer(db.Model):
   def __init__(self, tweet, sentiment):
     self.tweet = tweet
     self.sentiment = sentiment
+
+  def __repr__(self):
+    return '<id {} tweet {} sentiment {}>'.format(self.id, self.tweet, self.sentiment)
