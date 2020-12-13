@@ -39,13 +39,7 @@ pip3 install -r requirements.txt
 ### Development
 
 ```bash
-export FLASK_APP=run.py
-export FLASK_ENV=development
-export DATABASE_URL=postgresql://u:p@host:5432/qondo_neo
-```
-
-```bash
-flask run
+FLASK_APP=run.py FLASK_ENV=development SQLALCHEMY_DATABASE_URI=postgresql://u:p@host:5432/qondo_neo flask run
 ```
 
 ## Database

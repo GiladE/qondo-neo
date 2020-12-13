@@ -86,7 +86,7 @@
           start() {
             this.currentTweet = { id: null, text: null }
             this.loading = true
-            axios.get("/api/sentiments").then((response) => {
+            axios.get("/api/sentiments/").then((response) => {
               this.currentTweet = response.data
               if (this.currentTweet.id === null) { this.finished = true }
               this.loading = false
