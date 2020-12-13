@@ -14,6 +14,40 @@ Tweet Sentiment
   - bootstrap
 - postgresql
 
+### Setup
+
+```bash
+python3 -m venv env
+```
+
+```bash
+source env/bin/activate
+```
+
+```bash
+pip3 install --upgrade pip
+```
+
+```bash
+pip3 install flask
+```
+
+```bash
+pip3 install -r requirements.txt
+```
+
+### Development
+
+```bash
+export FLASK_APP=run.py
+export FLASK_ENV=development
+export DATABASE_URL=postgresql://u:p@host:5432/qondo_neo
+```
+
+```bash
+flask run
+```
+
 ## Database
 
 2 models/tables
