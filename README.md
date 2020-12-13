@@ -14,24 +14,6 @@ Tweet Sentiment
   - bootstrap
 - postgresql
 
-## Endpoints
-
-### GET `/`
-
-Returns frontend html
-
-### GET `/api`
-
-Healthcheck endpoint for api
-
-### GET `/api/sentiments`
-
-Returns single tweet as json
-
-### POST `/api/sentiments`
-
-Returns single tweet as json
-
 ## Database
 
 2 models/tables
@@ -51,6 +33,29 @@ answers
   - attribute - integer - tweet_id
   - relationship - belongs_to - tweet
 ```
+
+## Endpoints
+
+### GET `/`
+
+Returns frontend html
+
+### GET `/api`
+
+Healthcheck endpoint for api
+
+### GET `/api/sentiments`
+
+Returns single tweet as json
+
+### POST `/api/answers/<tweetid>`
+
+Create an answer in the database for the given tweet id.
+Returns single tweet as json (same as `/api/sentiments/` to avoid the additional request to get the next tweet)
+
+### POST `/api/sentiments`
+
+Creates tweets in the db for the provided csv
 
 ## Deployment
 
