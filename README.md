@@ -1,7 +1,7 @@
 Tweet Sentiment
 ---
 
-![Screenshot](docs/screenshot.png)
+<!--- ![Screenshot](docs/screenshot.png) --->
 
 ## Tech
 
