@@ -40,32 +40,42 @@
         <h3 style="color: #fff;">Tweet Sentiments</h3>
         <hr>
         <div v-if="currentTweet.id" class="card">
-          <div v-if="loading" class="card-body">loading...</div>
-          <div v-else class="card-body">
-            <em>Please state whether you think the following tweet is Positive or Negative. Choose Skip if you are
-              unsure</em>
-            <hr>
-            <div class="card-text">
+          <div class="card-body">
+            <em>
+              Please state whether you think the following tweet is Positive or Negative. Choose Skip if you are
+              unsure
+            </em>
+            <div class="card-text text-center">
+              <hr>
               <p>{{ currentTweet.text }}</p>
+              <hr>
             </div>
           </div>
           <div v-if="!loading" class="card-body container">
-            <button @click="answerPositive" type="button" class="btn btn-success">👍 Positive 👍</button>
-            <button @click="answerSkip" type="button" class="btn btn-secondary">- Skip -</button>
-            <button @click="answerNegative" type="button" class="btn btn-danger">👎 Negative 👎</button>
+            <button @click="answer('positive')" type="button" class="btn btn-success">👍 Positive 👍</button>
+            <button @click="answer('skip')" type="button" class="btn btn-secondary">- Skip -</button>
+            <button @click="answer('negative')" type="button" class="btn btn-danger">👎 Negative 👎</button>
+          </div>
+          <div v-if="loading" class="text-right" style="position: absolute; margin: 5px; right: 10px">
+            <div class="spinner-grow spinner-grow-sm text-success" role="status">
+              <span class="sr-only">Loading...</span>
+            </div>
           </div>
         </div>
         <div v-else class="card">
-          <div v-if="loading" class="card-body">loading...</div>
-          <div v-else class="card-body">
+          <div class="card-body">
             <em>Please help us by choosing whether you think tweets are positive👍 in sentiment or negative👎.</em>
-            <hr>
           </div>
           <div v-if="!loading && !finished" class="card-body container">
             <button @click="start" type="button" class="btn btn-secondary">Begin Answering</button>
           </div>
           <div v-else class="card-body container">
             <button disabled type="button" class="btn btn-secondary">Nothing Left To Answer. Come back later</button>
+          </div>
+          <div v-if="loading" class="text-right" style="position: absolute; margin: 5px; right: 10px">
+            <div class="spinner-grow spinner-grow-sm text-success" role="status">
+              <span class="sr-only">Loading...</span>
+            </div>
           </div>
         </div>
       </main>
@@ -92,30 +102,10 @@
               this.loading = false
             })
           },
-          answerPositive() {
+          answer(sentiment) {
             this.loading = true
             axios.post(`/api/answers/${this.currentTweet.id}`, {
-              sentiment: "positive"
-            }).then((response) => {
-              this.currentTweet = response.data
-              if (this.currentTweet.id === null) { this.finished = true }
-              this.loading = false
-            })
-          },
-          answerSkip() {
-            this.loading = true
-            axios.post(`/api/answers/${this.currentTweet.id}`, {
-              sentiment: "skip"
-            }).then((response) => {
-              this.currentTweet = response.data
-              if (this.currentTweet.id === null) { this.finished = true }
-              this.loading = false
-            })
-          },
-          answerNegative() {
-            this.loading = true
-            axios.post(`/api/answers/${this.currentTweet.id}`, {
-              sentiment: "negative"
+              sentiment: sentiment
             }).then((response) => {
               this.currentTweet = response.data
               if (this.currentTweet.id === null) { this.finished = true }
