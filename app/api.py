@@ -7,8 +7,8 @@ def api_index():
     data = { "PING": "PONG" }
     return make_response(jsonify(data), 200)
 
-@app.route("/api/sentiments/", methods=["GET"])
-def sentiments_index():
+@app.route("/api/tweets/", methods=["GET"])
+def tweets_index():
     tweet = Tweet.query.filter(~Tweet.answers.any()).first()
 
     if tweet != None:

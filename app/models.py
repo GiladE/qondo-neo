@@ -4,7 +4,7 @@ import enum
 class SentimentType(enum.Enum):
     positive = 1
     negative = 2
-    skip = 3
+    neutral = 3
 
 class Tweet(db.Model):
 

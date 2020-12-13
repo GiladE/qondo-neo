@@ -57,7 +57,7 @@ tweets
 ```
 answers
   - attribute - pk - id
-  - attribute - sentiment - enum (positive/negative/skip)
+  - attribute - sentiment - enum (positive/negative/neutral)
   - attribute - integer - tweet_id
   - relationship - belongs_to - tweet
 ```
@@ -72,7 +72,7 @@ Returns frontend html
 
 Healthcheck endpoint for api
 
-### GET `/api/sentiments`
+### GET `/api/tweets`
 
 Returns single tweet as json
 
@@ -81,7 +81,7 @@ Returns single tweet as json
 Create an answer in the database for the given tweet id.
 Returns single tweet as json (same as `/api/sentiments/` to avoid the additional request to get the next tweet)
 
-### POST `/api/sentiments`
+### POST `/api/tweets`
 
 Creates tweets in the db for the provided csv
 

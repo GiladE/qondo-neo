@@ -42,7 +42,7 @@
         <div v-if="currentTweet.id" class="card">
           <div class="card-body">
             <em>
-              Please state whether you think the following tweet is Positive or Negative. Choose Skip if you are
+              Please state whether you think the following tweet is Positive or Negative. Choose Neutral if you are
               unsure
             </em>
             <div class="card-text text-center">
@@ -53,7 +53,7 @@
           </div>
           <div v-if="!loading" class="card-body container">
             <button @click="answer('positive')" type="button" class="btn btn-success">👍 Positive 👍</button>
-            <button @click="answer('skip')" type="button" class="btn btn-secondary">- Skip -</button>
+            <button @click="answer('neutral')" type="button" class="btn btn-secondary">- Neutral -</button>
             <button @click="answer('negative')" type="button" class="btn btn-danger">👎 Negative 👎</button>
           </div>
           <div v-if="loading" class="text-right" style="position: absolute; margin: 5px; right: 10px">
@@ -96,7 +96,7 @@
           start() {
             this.currentTweet = { id: null, text: null }
             this.loading = true
-            axios.get("/api/sentiments/").then((response) => {
+            axios.get("/api/tweets/").then((response) => {
               this.currentTweet = response.data
               if (this.currentTweet.id === null) { this.finished = true }
               this.loading = false
