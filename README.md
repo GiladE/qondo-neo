@@ -1,6 +1,8 @@
 Tweet Sentiment
 ---
 
+![Screenshot](docs/screenshot.png)
+
 ## Tech
 
 - python
