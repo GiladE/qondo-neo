@@ -14,7 +14,6 @@
   <style>
     .container {
       display: flex;
-      /* or inline-flex */
       justify-content: space-evenly
     }
 
@@ -30,16 +29,12 @@
       text-shadow: 0 .05rem .1rem rgba(0, 0, 0, .5);
       box-shadow: inset 0 0 5rem rgba(0, 0, 0, .5);
     }
-
-    .cover-container {
-      max-width: 42em;
-    }
   </style>
 </head>
 
 <body>
   <main id="app" class="container text-center">
-    <div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
+    <div class="d-flex w-100 h-100 p-3 mx-auto flex-column">
       <main role="main" class="inner cover">
         <h1 style="color: #fff;">Qondo Neo</h1>
         <h3 style="color: #fff;">Tweet Sentiments</h3>
@@ -88,10 +83,45 @@
           }
         },
         methods: {
-          start() { alert("start") },
-          answerPositive() { alert("+") },
-          answerSkip() { alert("=") },
-          answerNegative() { alert("-") }
+          start() {
+            this.currentTweet = { id: null, text: null }
+            this.loading = true
+            axios.get("/api/sentiments").then((response) => {
+              this.currentTweet = response.data
+              if (this.currentTweet.id === null) { this.finished = true }
+              this.loading = false
+            })
+          },
+          answerPositive() {
+            this.loading = true
+            axios.post(`/api/answers/${this.currentTweet.id}`, {
+              sentiment: "positive"
+            }).then((response) => {
+              this.currentTweet = response.data
+              if (this.currentTweet.id === null) { this.finished = true }
+              this.loading = false
+            })
+          },
+          answerSkip() {
+            this.loading = true
+            axios.post(`/api/answers/${this.currentTweet.id}`, {
+              sentiment: "skip"
+            }).then((response) => {
+              this.currentTweet = response.data
+              if (this.currentTweet.id === null) { this.finished = true }
+              this.loading = false
+            })
+          },
+          answerNegative() {
+            this.loading = true
+            axios.post(`/api/answers/${this.currentTweet.id}`, {
+              sentiment: "negative"
+            }).then((response) => {
+              this.currentTweet = response.data
+              if (this.currentTweet.id === null) { this.finished = true }
+              this.loading = false
+            })
+          }
         }
       })
     })();
